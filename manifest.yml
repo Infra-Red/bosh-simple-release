@@ -1,0 +1,55 @@
+name: simple-release
+director_uuid: de7e613b-0f3a-47f8-8e94-cbd81af62746
+
+releases:
+- name: simple_release
+  version: latest
+
+compilation:
+  workers: 1
+  network: compilation
+  reuse_compilation_vms: true
+  cloud_properties:
+    name: random
+
+update:
+  canaries: 1
+  canary_watch_time: 30000-600000
+  update_watch_time: 30000-600000
+  max_in_flight: 1
+
+resource_pools:
+- name: test-release-resource-pool
+  network: workers
+  stemcell:
+    name: bosh-warden-boshlite-ubuntu-trusty-go_agent
+    version: latest
+  cloud_properties:
+    name: random
+
+
+networks:
+- name: workers
+  subnets:
+  - cloud_properties:
+      name: random
+    range: 10.244.5.0/30
+    reserved:
+    - 10.244.5.1
+    static:
+    - 10.244.5.2
+- name: compilation
+  type: dynamic
+
+
+jobs:
+- name: simple
+  templates:
+  - name: simple
+    release: simple_release
+  instances: 1
+  networks:
+  - name: workers
+    static_ips:
+    - 10.244.5.2
+  resource_pool: test-release-resource-pool

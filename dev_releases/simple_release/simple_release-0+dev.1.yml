@@ -1,0 +1,16 @@
+---
+packages:
+- name: simple
+  version: 45cfd89f2cde0ff56941f915b4de405ab3ce6e6b
+  fingerprint: 45cfd89f2cde0ff56941f915b4de405ab3ce6e6b
+  sha1: 106135f896526f0f7fc0007d70e7224ec3143889
+  dependencies: []
+jobs:
+- name: simple
+  version: b66516e25ae08ba37546822887b3e86dae1aab67
+  fingerprint: b66516e25ae08ba37546822887b3e86dae1aab67
+  sha1: 0425f36a96bc165a53339f912f020e9273b24396
+commit_hash: '00000000'
+uncommitted_changes: false
+name: simple_release
+version: 0+dev.1
